@@ -13,112 +13,119 @@
     <main>
         <img src="tela00.jpg" alt="">
         <div class="container">
-        <h1>🌳 Aventura: O Artefato Antigo 🔮</h1>
+        <h1>🦇 A Noite de Gotham: Batman vs. Coringa 🤡</h1>
         <div id="story-text"></div>
         <div class="choices" id="choices-container"></div>
     </div>
 
     <script>
-        // Mapeamento dos Finais para um resumo rápido
+        // Mapeamento dos Finais (16)
         const FINAIS = {
-            "Final 01": "Guardião da Floresta: Você decifra o artefato e ganha poderes ancestrais, tornando-se um protetor da natureza.",
-            "Final 02": "Portal Místico: Você viaja para outra dimensão, onde se torna um mestre das artes mágicas.",
-            "Final 03": "Companheiro Leal: A sombra misteriosa vira seu aliado, e juntos descobrem segredos perdidos.",
-            "Final 04": "Solitude Fatal: Ao se isolar, você se perde na floresta, sem encontrar resposta alguma.",
-            "Final 05": "Conflito Inesperado: Você derrota um bando de criaturas e se torna herói local.",
-            "Final 06": "Mestre da Sombra: A criatura que o observava o ensina os segredos das sombras e da furtividade.",
-            "Final 07": "Dupla Inquebrável: Com seu rival, vocês conquistam a Montanha e se tornam lendas na região.",
-            "Final 08": "Desastre nas Alturas: O atalho leva a uma avalanche, mas vocês salvam vidas e viram heróis.",
-            "Final 09": "Monge do Retiro: Após meses de meditação e treino, você retorna mais forte para enfrentar seu destino.",
-            "Final 10": "O Perigo da Pressa: Sem o preparo adequado, você falha na cidade e precisa recomeçar.",
-            "Final 11": "Guardião das Cavernas: No fundo da caverna, você faz um pacto com uma entidade e ganha habilidades raras.",
-            "Final 12": "Explorador das Ruínas: Você segue os ventos e descobre uma técnica mágica ancestral.",
-            "Final 13": "Líder Comunitário: Você ajuda uma aldeia a repelir invasores, tornando-se um símbolo de liderança.",
-            "Final 14": "Viagem Solitária: Você chega à cidade sem muito, mas percebe que cada passo de sua jornada foi necessário."
+            "Final 01": "VITÓRIA MESTRA: Você resgata Robin, desativa a bomba e captura o Coringa, restaurando a paz de Gotham por um tempo. Um triunfo da inteligência.",
+            "Final 02": "BOMBA DE DISTRAÇÃO: O Coringa escapa na confusão da desativação da bomba, mas Robin está seguro. Uma vitória agridoce.",
+            "Final 03": "ALIANÇA PERIGOSA: Robin, afetado pelo gás, temporariamente se volta contra você. Você o imobiliza e cura, mas o Coringa some na cidade.",
+            "Final 04": "RISADA FINAL: O Coringa ri ao ser capturado, revelando ter enviado réplicas de gás tóxico por toda Gotham. Você venceu a luta, mas perdeu a guerra.",
+            "Final 05": "O EXÍLIO DO VILÃO: Você persegue o Coringa até o porto e o força a fugir de Gotham em um navio. Ele está fora, mas jura voltar.",
+            "Final 06": "O CAOS DA CIDADE: Ao confrontar o Coringa, ele ativa um sinal para seus capangas espalhados. Você o captura, mas Gotham mergulha no caos.",
+            "Final 07": "SACRIFÍCIO SILENCIOSO: Você usa um dispositivo para desmaiar todos, incluindo Robin e você. Todos estão seguros, mas a captura do Coringa falha, pois ele acorda primeiro.",
+            "Final 08": "ROBIN NO COMANDO: Robin te surpreende, usando seu treinamento para virar a armadilha contra o Coringa. O Coringa é preso, e Robin ganha um novo respeito.",
+            "Final 09": "O DESAFIO DO ENIGMA: O Enigma (Riddler) entra em cena para 'ajudar', complicando tudo. Você frustra o plano do Coringa, mas tem um novo inimigo mais irritante.",
+            "Final 10": "A REFORMA DO CORINGA: Você captura o Coringa, mas um raio o atinge no caminho para Arkham, mudando sua personalidade para um cidadão comum (e chato).",
+            "Final 11": "MISTÉRIO DO POÇO: Você encontra uma passagem secreta sob o poço, levando a um esconderijo mais profundo, onde captura a verdadeira mente por trás do plano.",
+            "Final 12": "FÚRIA CEGA: Você ignora o poço, ataca o Coringa e o derrota com facilidade. Ele ri, revelando que aquilo era só um chamariz. Você perde tempo valioso.",
+            "Final 13": "LIGA DA JUSTIÇA: Você liga para a Liga, que chega em segundos. O Coringa se rende, entediado pela falta de desafio. Vitória total, mas sem emoção.",
+            "Final 14": "MORCEGO SOLITÁRIO: Você ignora o chamado de Robin, desconfiado de uma armadilha. O Coringa, irritado pela sua covardia percebida, liberta Robin e sai de Gotham.",
+            "Final 15": "GUERRA DE GANGUES: Você intercepta uma mensagem e impede que o Coringa se alie a Duas Caras. Você o captura, salvando Gotham de uma guerra de gangues.",
+            "Final 16": "O NOVO VILÃO: Você é pego por uma armadilha e Robin é forçado a te salvar. Ele captura o Coringa e se torna o 'Bat-Robin', decidindo que você está velho demais."
         };
 
         // Estrutura da história
         const STORY_PAGES = {
             "start": {
-                text: "Você se encontra na **[1] Floresta Antiga**, uma terra coberta por árvores centenárias e uma aura de mistério. Seu objetivo é **[1] Explorar o lugar e tentar descobrir a origem do artefato** que você carrega.",
+                text: "Uma sirene ecoa em Gotham. O Coringa sequestrou Robin e o está mantendo no topo de um prédio, ameaçando detonar uma bomba de gás do riso por toda a cidade. Seu comunicador toca: **'Vem brincar, Morcegão! Escolha seu caminho!'**",
                 choices: [
-                    { text: "[1] O artefato reage a uma energia desconhecida: Investigar", nextPage: "investigar_artefato" },
-                    { text: "[2] O artefato começa a brilhar em sua mão: Ignorar", nextPage: "ignorar_brilho" },
-                    { text: "[2] Montanha das Sombras", nextPage: "montanha_das_sombras" }
+                    { text: "[1] Usar o Batwing e ir direto ao prédio para o confronto.", nextPage: "confronto_direto" },
+                    { text: "[2] Seguir a trilha de pistas do Coringa para entender o plano.", nextPage: "trilha_pistas" }
                 ]
             },
-            "investigar_artefato": {
-                text: "Ao investigar, o artefato o guia mais fundo na floresta, reagindo fortemente a uma trilha oculta.",
+            "confronto_direto": {
+                text: "Você chega ao topo do prédio. O Coringa está ao lado de Robin, que parece grogue, e aponta para dois pacotes:",
                 choices: [
-                    { text: "[1] Seguir a trilha que o artefato indica", nextPage: "Final 01" },
-                    { text: "[2] Usar o artefato para ativar um portal", nextPage: "Final 02" }
+                    { text: "[1] Focar no Coringa e tentar subjugá-lo rapidamente.", nextPage: "focar_coringa" },
+                    { text: "[2] Focar na bomba e tentar desativá-la primeiro.", nextPage: "focar_bomba" }
                 ]
             },
-            "ignorar_brilho": {
-                text: "Você ignora o brilho, mas uma presença sombria e misteriosa começa a segui-lo. Você tem que decidir como reagir a ela.",
+            "focar_coringa": {
+                text: "Você lança um Batarang. O Coringa desvia, mas joga Robin em sua direção. Você tem uma fração de segundo para agir.",
                 choices: [
-                    { text: "[1] Ele o seguiu até o fim do caminho, você aceita a ajuda", nextPage: "Final 03" },
-                    { text: "[2] Você o abandona e tenta continuar sozinho", nextPage: "Final 04" },
-                    { text: "[2] Afugentar a presença estranha que se aproxima", nextPage: "afugentar_presenca" }
+                    { text: "[1] Imobilizar Robin e enfrentar o Coringa (Risco de gás).", nextPage: "robin_e_coringa" },
+                    { text: "[2] Se afastar do gás do riso (Risco de fuga).", nextPage: "afastar_gas" }
                 ]
             },
-            "afugentar_presenca": {
-                text: "Você tenta afugentar a presença. Como isso afeta o que está ao seu redor?",
+            "robin_e_coringa": {
+                text: "Você agarra Robin e o envolve em sua capa, mas o Coringa aproveita para te mostrar um de seus truques.",
                 choices: [
-                    { text: "[1] O bando aparece, eles não gostam de estranhos", nextPage: "Final 05" },
-                    { text: "[2] Eles se afastam, mas uma sombra misteriosa observa você", nextPage: "Final 06" }
+                    { text: "[1] Capturá-lo imediatamente (Alto risco de armadilha).", nextPage: "Final 04" },
+                    { text: "[2] Usar gás do sono em todos ao redor.", nextPage: "Final 07" }
                 ]
             },
-            "montanha_das_sombras": {
-                text: "Você decide ir para a **[2] Montanha das Sombras**. O ar é frio e rarefeito, e você se depara com um rival enigmático no seu caminho.",
+            "afastar_gas": {
+                text: "Você evita o gás. O Coringa ri e corre para o beiral do prédio.",
                 choices: [
-                    { text: "[1] Enfrentar o desafio de um rival enigmático", nextPage: "enfrentar_rival" },
-                    { text: "[2] Evitar o conflito", nextPage: "evitar_conflito" }
+                    { text: "[1] Perseguir o Coringa na fuga.", nextPage: "Final 05" },
+                    { text: "[2] Capturar o Coringa antes que ele chegue ao beiral.", nextPage: "Final 06" }
                 ]
             },
-            "enfrentar_rival": {
-                text: "O rival para você na trilha e te testa com um desafio, mas faz uma proposta inesperada.",
+            "focar_bomba": {
+                text: "Você corre para a bomba, mas Coringa ativa um alarme em seu pulso. Robin começa a tossir, o gás está perto demais.",
                 choices: [
-                    { text: "[1] O rival te propõe uma parceria: Viajar juntos", nextPage: "parceria_rival" },
-                    { text: "[2] O rival te desafia, mas você recusa a parceria", nextPage: "recusar_parceria" }
+                    { text: "[1] Tentar desativar o mecanismo principal da bomba.", nextPage: "desativar_bomba" },
+                    { text: "[2] Deixar Robin desativar, confiando no treinamento dele.", nextPage: "Final 08" }
                 ]
             },
-            "parceria_rival": {
-                text: "Aceitando a parceria, vocês precisam decidir como subir a montanha.",
+            "desativar_bomba": {
+                text: "A desativação é complexa. Você precisa de foco total.",
                 choices: [
-                    { text: "[1] Seguir pelo caminho seguro", nextPage: "Final 07" },
-                    { text: "[2] Pegar o atalho arriscado", nextPage: "Final 08" }
+                    { text: "[1] Ignorar o Coringa e completar a desativação.", nextPage: "Final 02" },
+                    { text: "[2] Usar a força bruta para destruir a bomba e o Coringa.", nextPage: "Final 01" }
                 ]
             },
-            "recusar_parceria": {
-                text: "Você recusa a oferta e decide focar na sua própria jornada.",
+            "trilha_pistas": {
+                text: "Você desce para a cidade e segue a primeira pista: um bilhete colado em um poço de esgoto. Ele diz: **'O Morcego cai onde a água brilha.'**",
                 choices: [
-                    { text: "[1] Treinar sozinho em um retiro", nextPage: "Final 09" },
-                    { text: "[2] Seguir direto para a grande cidade", nextPage: "Final 10" }
+                    { text: "[1] Entrar no poço e seguir a pista (Alto risco de armadilha).", nextPage: "entrar_poco" },
+                    { text: "[2] Ligar para Robin (ignorar a armadilha do Coringa).", nextPage: "ligar_robin" }
                 ]
             },
-            "evitar_conflito": {
-                text: "Você desvia da trilha principal para evitar o rival e precisa de um novo rumo.",
+            "entrar_poco": {
+                text: "O poço é escuro. Você encontra uma bifurcação. À direita, um brilho verde. À esquerda, ventilação de esgoto.",
                 choices: [
-                    { text: "[1] Entrar em uma caverna profunda", nextPage: "caverna_profunda" },
-                    { text: "[2] Procurar uma rota alternativa", nextPage: "rota_alternativa" }
+                    { text: "[1] Investigar o brilho verde (Pode ser o Enigma).", nextPage: "Final 09" },
+                    { text: "[2] Seguir os dutos de ventilação.", nextPage: "seguir_dutos" }
                 ]
             },
-            "caverna_profunda": {
-                text: "Na caverna, você sente um poder estranho e ouve ecos profundos.",
+            "seguir_dutos": {
+                text: "Você segue os dutos, que levam a um antigo esconderijo do Coringa.",
                 choices: [
-                    { text: "[1] Investigar uma fonte misteriosa", nextPage: "Final 11" },
-                    { text: "[2] Seguir os ecos dos ventos profundos", nextPage: "Final 12" }
+                    { text: "[1] Investigar o lago subterrâneo brilhante.", nextPage: "Final 11" },
+                    { text: "[2] Atacar o Coringa no esconderijo (se estiver lá).", nextPage: "Final 12" }
                 ]
             },
-            "rota_alternativa": {
-                text: "Ao buscar uma rota, você encontra uma pequena aldeia em apuros.",
+            "ligar_robin": {
+                text: "Robin atende, mas sua voz está estranhamente calma. **'Batman, o Coringa está aqui. Eu preciso que você...'** A ligação cai.",
                 choices: [
-                    { text: "[1] Ajudar uma aldeia em necessidade", nextPage: "Final 13" },
-                    { text: "[2] Ignorar e acelerar sua jornada", nextPage: "Final 14" }
+                    { text: "[1] Chamar a Liga da Justiça para ajuda imediata.", nextPage: "Final 13" },
+                    { text: "[2] Rastrear o sinal de Robin e ir sozinho.", nextPage: "rastrear_sinal" }
                 ]
             },
-            // Adiciona todas as páginas de Final (Final 01 a Final 14)
+            "rastrear_sinal": {
+                text: "O rastreio te leva a um depósito abandonado. Você intercepta uma comunicação entre o Coringa e outro vilão.",
+                choices: [
+                    { text: "[1] Interromper a comunicação e prender o Coringa.", nextPage: "Final 15" },
+                    { text: "[2] Usar o rastreador para achar Robin e o Coringa (Pode ser outra armadilha).", nextPage: "Final 16" }
+                ]
+            },
+            // Finais
             "Final 01": { isFinal: true },
             "Final 02": { isFinal: true },
             "Final 03": { isFinal: true },
@@ -132,7 +139,9 @@
             "Final 11": { isFinal: true },
             "Final 12": { isFinal: true },
             "Final 13": { isFinal: true },
-            "Final 14": { isFinal: true }
+            "Final 14": { isFinal: true },
+            "Final 15": { isFinal: true },
+            "Final 16": { isFinal: true }
         };
 
         let currentPageId = "start";
@@ -142,10 +151,9 @@
             const storyTextDiv = document.getElementById('story-text');
             const choicesContainer = document.getElementById('choices-container');
 
-            // Limpa o conteúdo anterior
             choicesContainer.innerHTML = '';
             
-            // Renderiza o texto (substituindo o Markdown ** negrito)
+            // Renderiza o texto (Markdown ** negrito)
             storyTextDiv.innerHTML = page.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
             if (page.isFinal) {
@@ -153,13 +161,13 @@
                 const finalKey = currentPageId;
                 storyTextDiv.classList.add('final-result');
                 storyTextDiv.innerHTML = `
-                    <h2>Parabéns! Você alcançou o ${finalKey}!</h2>
+                    <h2>🏁 FINAL ENCONTRADO: ${finalKey}</h2>
                     <p>${FINAIS[finalKey]}</p>
                 `;
                 
                 // Botão de reiniciar
                 const restartButton = document.createElement('button');
-                restartButton.textContent = "🔁 Recomeçar Aventura";
+                restartButton.textContent = "🔁 Reiniciar em Gotham";
                 restartButton.classList.add('restart-button');
                 restartButton.onclick = () => {
                     storyTextDiv.classList.remove('final-result');
@@ -169,7 +177,7 @@
                 choicesContainer.appendChild(restartButton);
 
             } else {
-                // Não é um final (página de escolhas)
+                // Página de escolhas
                 page.choices.forEach(choice => {
                     const button = document.createElement('button');
                     button.textContent = choice.text;
