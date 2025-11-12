@@ -11,18 +11,178 @@
 
 <body>
     <main>
-        <div class="passo ativo" id="passo-0">
-            <img src="./tela00.jpg" alt="">
-            <p> Você recebe seu primeiro artefato mágico e começa sua jornada!
- Um mentor misterioso de sua cidade entrega um artefato (uma pedra mágica, um pergaminho ou um artefato ancestral) e pergunta:
-</p>
-             <button>floresta antiga</button>
-              <button>montanha das sombras</button>
-        </div>
-    </main>
+        <div class="container">
+        <h1>🌳 Aventura: O Artefato Antigo 🔮</h1>
+        <div id="story-text"></div>
+        <div class="choices" id="choices-container"></div>
+    </div>
 
-  <script src="./main.js"></script>
+    <script>
+        // Mapeamento dos Finais para um resumo rápido
+        const FINAIS = {
+            "Final 01": "Guardião da Floresta: Você decifra o artefato e ganha poderes ancestrais, tornando-se um protetor da natureza.",
+            "Final 02": "Portal Místico: Você viaja para outra dimensão, onde se torna um mestre das artes mágicas.",
+            "Final 03": "Companheiro Leal: A sombra misteriosa vira seu aliado, e juntos descobrem segredos perdidos.",
+            "Final 04": "Solitude Fatal: Ao se isolar, você se perde na floresta, sem encontrar resposta alguma.",
+            "Final 05": "Conflito Inesperado: Você derrota um bando de criaturas e se torna herói local.",
+            "Final 06": "Mestre da Sombra: A criatura que o observava o ensina os segredos das sombras e da furtividade.",
+            "Final 07": "Dupla Inquebrável: Com seu rival, vocês conquistam a Montanha e se tornam lendas na região.",
+            "Final 08": "Desastre nas Alturas: O atalho leva a uma avalanche, mas vocês salvam vidas e viram heróis.",
+            "Final 09": "Monge do Retiro: Após meses de meditação e treino, você retorna mais forte para enfrentar seu destino.",
+            "Final 10": "O Perigo da Pressa: Sem o preparo adequado, você falha na cidade e precisa recomeçar.",
+            "Final 11": "Guardião das Cavernas: No fundo da caverna, você faz um pacto com uma entidade e ganha habilidades raras.",
+            "Final 12": "Explorador das Ruínas: Você segue os ventos e descobre uma técnica mágica ancestral.",
+            "Final 13": "Líder Comunitário: Você ajuda uma aldeia a repelir invasores, tornando-se um símbolo de liderança.",
+            "Final 14": "Viagem Solitária: Você chega à cidade sem muito, mas percebe que cada passo de sua jornada foi necessário."
+        };
 
+        // Estrutura da história
+        const STORY_PAGES = {
+            "start": {
+                text: "Você se encontra na **[1] Floresta Antiga**, uma terra coberta por árvores centenárias e uma aura de mistério. Seu objetivo é **[1] Explorar o lugar e tentar descobrir a origem do artefato** que você carrega.",
+                choices: [
+                    { text: "[1] O artefato reage a uma energia desconhecida: Investigar", nextPage: "investigar_artefato" },
+                    { text: "[2] O artefato começa a brilhar em sua mão: Ignorar", nextPage: "ignorar_brilho" },
+                    { text: "[2] Montanha das Sombras", nextPage: "montanha_das_sombras" }
+                ]
+            },
+            "investigar_artefato": {
+                text: "Ao investigar, o artefato o guia mais fundo na floresta, reagindo fortemente a uma trilha oculta.",
+                choices: [
+                    { text: "[1] Seguir a trilha que o artefato indica", nextPage: "Final 01" },
+                    { text: "[2] Usar o artefato para ativar um portal", nextPage: "Final 02" }
+                ]
+            },
+            "ignorar_brilho": {
+                text: "Você ignora o brilho, mas uma presença sombria e misteriosa começa a segui-lo. Você tem que decidir como reagir a ela.",
+                choices: [
+                    { text: "[1] Ele o seguiu até o fim do caminho, você aceita a ajuda", nextPage: "Final 03" },
+                    { text: "[2] Você o abandona e tenta continuar sozinho", nextPage: "Final 04" },
+                    { text: "[2] Afugentar a presença estranha que se aproxima", nextPage: "afugentar_presenca" }
+                ]
+            },
+            "afugentar_presenca": {
+                text: "Você tenta afugentar a presença. Como isso afeta o que está ao seu redor?",
+                choices: [
+                    { text: "[1] O bando aparece, eles não gostam de estranhos", nextPage: "Final 05" },
+                    { text: "[2] Eles se afastam, mas uma sombra misteriosa observa você", nextPage: "Final 06" }
+                ]
+            },
+            "montanha_das_sombras": {
+                text: "Você decide ir para a **[2] Montanha das Sombras**. O ar é frio e rarefeito, e você se depara com um rival enigmático no seu caminho.",
+                choices: [
+                    { text: "[1] Enfrentar o desafio de um rival enigmático", nextPage: "enfrentar_rival" },
+                    { text: "[2] Evitar o conflito", nextPage: "evitar_conflito" }
+                ]
+            },
+            "enfrentar_rival": {
+                text: "O rival para você na trilha e te testa com um desafio, mas faz uma proposta inesperada.",
+                choices: [
+                    { text: "[1] O rival te propõe uma parceria: Viajar juntos", nextPage: "parceria_rival" },
+                    { text: "[2] O rival te desafia, mas você recusa a parceria", nextPage: "recusar_parceria" }
+                ]
+            },
+            "parceria_rival": {
+                text: "Aceitando a parceria, vocês precisam decidir como subir a montanha.",
+                choices: [
+                    { text: "[1] Seguir pelo caminho seguro", nextPage: "Final 07" },
+                    { text: "[2] Pegar o atalho arriscado", nextPage: "Final 08" }
+                ]
+            },
+            "recusar_parceria": {
+                text: "Você recusa a oferta e decide focar na sua própria jornada.",
+                choices: [
+                    { text: "[1] Treinar sozinho em um retiro", nextPage: "Final 09" },
+                    { text: "[2] Seguir direto para a grande cidade", nextPage: "Final 10" }
+                ]
+            },
+            "evitar_conflito": {
+                text: "Você desvia da trilha principal para evitar o rival e precisa de um novo rumo.",
+                choices: [
+                    { text: "[1] Entrar em uma caverna profunda", nextPage: "caverna_profunda" },
+                    { text: "[2] Procurar uma rota alternativa", nextPage: "rota_alternativa" }
+                ]
+            },
+            "caverna_profunda": {
+                text: "Na caverna, você sente um poder estranho e ouve ecos profundos.",
+                choices: [
+                    { text: "[1] Investigar uma fonte misteriosa", nextPage: "Final 11" },
+                    { text: "[2] Seguir os ecos dos ventos profundos", nextPage: "Final 12" }
+                ]
+            },
+            "rota_alternativa": {
+                text: "Ao buscar uma rota, você encontra uma pequena aldeia em apuros.",
+                choices: [
+                    { text: "[1] Ajudar uma aldeia em necessidade", nextPage: "Final 13" },
+                    { text: "[2] Ignorar e acelerar sua jornada", nextPage: "Final 14" }
+                ]
+            },
+            // Adiciona todas as páginas de Final (Final 01 a Final 14)
+            "Final 01": { isFinal: true },
+            "Final 02": { isFinal: true },
+            "Final 03": { isFinal: true },
+            "Final 04": { isFinal: true },
+            "Final 05": { isFinal: true },
+            "Final 06": { isFinal: true },
+            "Final 07": { isFinal: true },
+            "Final 08": { isFinal: true },
+            "Final 09": { isFinal: true },
+            "Final 10": { isFinal: true },
+            "Final 11": { isFinal: true },
+            "Final 12": { isFinal: true },
+            "Final 13": { isFinal: true },
+            "Final 14": { isFinal: true }
+        };
+
+        let currentPageId = "start";
+
+        function renderPage() {
+            const page = STORY_PAGES[currentPageId];
+            const storyTextDiv = document.getElementById('story-text');
+            const choicesContainer = document.getElementById('choices-container');
+
+            // Limpa o conteúdo anterior
+            choicesContainer.innerHTML = '';
+            
+            // Renderiza o texto (substituindo o Markdown ** negrito)
+            storyTextDiv.innerHTML = page.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+            if (page.isFinal) {
+                // É um final
+                const finalKey = currentPageId;
+                storyTextDiv.classList.add('final-result');
+                storyTextDiv.innerHTML = `
+                    <h2>Parabéns! Você alcançou o ${finalKey}!</h2>
+                    <p>${FINAIS[finalKey]}</p>
+                `;
+                
+                // Botão de reiniciar
+                const restartButton = document.createElement('button');
+                restartButton.textContent = "🔁 Recomeçar Aventura";
+                restartButton.classList.add('restart-button');
+                restartButton.onclick = () => {
+                    storyTextDiv.classList.remove('final-result');
+                    currentPageId = "start";
+                    renderPage();
+                };
+                choicesContainer.appendChild(restartButton);
+
+            } else {
+                // Não é um final (página de escolhas)
+                page.choices.forEach(choice => {
+                    const button = document.createElement('button');
+                    button.textContent = choice.text;
+                    button.onclick = () => {
+                        currentPageId = choice.nextPage;
+                        renderPage();
+                    };
+                    choicesContainer.appendChild(button);
+                });
+            }
+        }
+
+        // Inicia a história
+        window.onload = renderPage;
+    </script>
 </body>
-
 </html>
